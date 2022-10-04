@@ -7,11 +7,7 @@ namespace la_mia_pizzeria_static.Controllers
     public class PizzaController : Controller
     {
 
-        public IActionResult Index()
-        {
-            return View("Home");
-        }
-        public IActionResult Pizze()
+        public List<Pizza> getPizze()
         {
             List<Pizza> pizzeList = new()
             {
@@ -21,7 +17,22 @@ namespace la_mia_pizzeria_static.Controllers
                 new Pizza("Pugliese", "pomodoro, mozzarella, capperi, aciughe", "/img/pizza4.png", 10.99F)
 
             };
-            return View("Index", pizzeList);
+            return pizzeList;
+        }
+
+        public IActionResult Index()
+        {
+            return View("Home");
+        }
+        public IActionResult Pizze()
+        {
+           
+            return View("Index", getPizze());
+        }
+
+        public IActionResult Show(int id)
+        {
+            return View(getPizze()[id]);
         }
 
         public IActionResult Privacy()
